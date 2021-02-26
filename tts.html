@@ -1,0 +1,249 @@
+<HTML>
+
+<head>
+    <title> Text to speech </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.6.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+    <style>
+        * {
+            user-select: none
+        }
+
+        .container {
+            align-content: center;
+            text-align: center;
+            padding: 12px 12px;
+
+        }
+
+        #inner-content {
+            margin-bottom: 20%;
+        }
+
+        input {
+            background: white;
+            padding: 0.5% 1.5%;
+            border: 1px solid black;
+            border-radius: 3px;
+            width: 50%;
+            font: 160% Arial;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #9ecaed;
+            background: white;
+            box-shadow: 0 0 10px #9ecaed;
+            color: black;
+        }
+
+        .logo {
+            padding-top: 5%;
+            padding-bottom: 5%;
+            font: 500% Arial;
+        }
+
+        select {
+            padding: 0.5% 0.75%;
+            cursor: pointer;
+            background: white;
+            border-radius: 5%;
+            font: 160% Arial;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #9ecaed;
+            box-shadow: 0 0 10px #9ecaed;
+            background: white;
+            color: black;
+        }
+
+        select optgroup {
+            font-size: 75%;
+        }
+
+        #trigger {
+            padding: 0.5% 3%;
+            font: 160% Arial;
+            transform: translate(0, -10%)
+        }
+
+
+        @media only screen and (max-width: 750px) {
+            .logo {
+                padding-top: 5%;
+                padding-bottom: 5%;
+                font: 300% Arial;
+            }
+        }
+
+        @media only screen and (min-height: 750px) {
+            .logo {
+                padding-top: 15%;
+                padding-bottom: 25%;
+            }
+
+            input {
+                font: 200% Arial;
+                width: 60%;
+                padding: 1% 3%;
+                transform: none;
+            }
+
+            #trigger {
+                margin-top: 3%;
+                padding: 1% 4%;
+                font: 200% Arial;
+            }
+
+            select {
+                padding: 1% 1.5%;
+                background: white;
+                border-radius: 5%;
+                font: 200% Arial;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
+        <a class="navbar-brand" href="#">TTS-Text to speech</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="./mytranslate">Stelios translator</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">TTS-Text to speech</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        More
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="?modal-show=true">Reload as unsupported browser</a>
+                        <a class="dropdown-item" href="#" onclick="$('#about').modal('show')">About me</a>
+                        <a class="dropdown-item" href="#" onclick="$('#browser').modal('show')">About your browser</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container" id="inner-content">
+        <div class=logo>
+            <span style=color:darkgreen>TTS</span>-Text to speech
+        </div>
+        <input type=text id=text placeholder="Type some text..." onkeyup="if(event.key=='Enter'){speak()}" spellcheck="true"> <select id=lang>
+            <optgroup label="Select a language">
+                <option value="en-US" selected>English</option>
+                <option value="de-DE">German</option>
+                <option value="fr-FR">French</option>
+            </optgroup>
+        </select> <button onclick="speak()" class="btn btn-success" id="trigger">speak</button>
+    </div>
+    <div class="modal fade" id="about">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">About</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    Made by stelios 2020©. Source code hasn't been patented.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Unsupported browser</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Unsupported browser. Please try from Chrome(33+), Edge(14+), Opera(21+) or Firefox(49+)
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                            Download Chrome
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="https://www.google.com/chrome/" target="_blank">Chrome</a>
+                            <a class="dropdown-item" href="https://www.microsoft.com/edge" target="_blank">Edge</a>
+                            <a class="dropdown-item" href="https://www.opera.com/download" target="_blank">Opera</a>
+                            <a class="dropdown-item" href="https://www.mozilla.org/firefox/new/" target="_blank">Firefox</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="browser">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">About your browser</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="browser-name">
+                    Your browser is a new version of Chrome, Edge Chromium, Firefox or Opera desktop.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="py-4 bg-dark text-white-50">
+
+        <!-- Copyright -->
+        <div class="container text-center">
+            Made by Stelios 2020©.
+        </div>
+
+    </footer>
+    <script>
+        var showModal = /modal-show=([^&]+)/.exec(window.location.href) || [null, "false"]
+        if(showModal[1] == "true") {
+            $('#modal').modal('show')
+        }
+
+        try {
+            SpeechSynthesisUtterance;
+        } catch (e) {
+            $('#modal').modal('show')
+            if(/MSIE (\d+\.\d+);/.test(navigator.userAgent) || navigator.userAgent.indexOf("Trident/") > -1) {
+                $("#browser-name").html('You are using Internet Explorer. Please use Edge or an another newer browser.')
+            } else {
+                $('#browser-name').html('You are using an old browser or Opera Mobile.')
+            }
+        }
+
+        function speak() {
+            var msg = new SpeechSynthesisUtterance();
+            msg.text = document.getElementById('text').value;
+            msg.lang = document.getElementById('lang').value;
+            speechSynthesis.speak(msg);
+
+        }
+    </script>
+
+</body>
+
+</html>
