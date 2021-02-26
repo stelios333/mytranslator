@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Stelios translator </title>
+    <style>
+        @font-face {
+            font-family: 'FontAwesome';
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .inline-text {
+            font: 125% Arial;
+        }
+
+        .logo {
+            font-size: 300%;
+            text-align: center;
+            margin: 5% 5%;
+
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        #output-info {
+            margin-top: 1%;
+        }
+
+        #output-container {
+            color: #808080;
+            text-align: center;
+            margin: 4%;
+            padding-top: 4%;
+            padding-bottom: 4%;
+        }
+
+        #srctext {
+            font: 150% Arial;
+
+            margin-bottom: 3%
+        }
+
+        #trigger {
+            font: 125% Arial;
+            padding: 0.75% 15%;
+            margin-left: 3%;
+        }
+
+        #lang,
+        #srclang {
+            width: 20%;
+            font: 125% Arial;
+        }
+
+        select optgroup {
+            font: 90% Arial;
+        }
+
+        #output {
+            font: 125% Arial;
+        }
+
+        /* Style for mobile */
+        @media only screen and (max-width: 990px) {
+            #trigger {
+                padding: 0.75% 12%;
+            }
+        }
+
+        @media only screen and (min-height: 800px) {
+
+            #lang,
+            #srclang {
+                width: 20%;
+                height: 10%;
+                font: 150% Arial;
+            }
+
+            #trigger {
+                margin-top: 3%;
+                padding: 1% 10%;
+                font: 150% Arial;
+                transform: translate(0, -24%);
+            }
+
+            #srctext {
+                height: 50px;
+                font: 150% Arial;
+            }
+
+            .inline-text {
+                font: 150% Arial;
+            }
+
+            #output-container {
+                text-align: center;
+                font: 150% Arial;
+                height: 600px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.8.3/umd/popper.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
+        <a class="navbar-brand" href="#">Stelios translator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Stelios translator</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./tts">TTS-Text to speech</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        More
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="?modal-show=true">Reload as unsupported browser</a>
+                        <a class="dropdown-item" href="#" onclick="$('#about').modal('show')">About me</a>
+                        <a class="dropdown-item" href="#" onclick="$('#browser').modal('show')">About your browser</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="toast" style="position: absolute; top: 12%; right: 1%; background-color: rgba(255, 255, 255, 1);" data-delay="8000">
+        <div class="toast-header" style="background-color: rgba(255, 255, 255, 1);">
+            <span class="mr-2" style="font-family:FontAwesome;color:green">&#xf058;</span>
+            <strong class="mr-auto">What's new</strong>
+            <small>version 1.6.1</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            The new version 3x faster than the previous version.<br>Now server doesn't crashes or delay a lot. 
+        </div>
+    </div>
+    <div class="container">
+        <div class="logo"><span>Stelios Translator - The #1 translator in the web</span></div>
+        <input class="form-control" type="text" data-title="Error" data-content="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This field is required.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" data-placement="top" placeholder="Type text to translate" id="srctext" onkeyup="if(event.key=='Enter'){tran()}">
+        <span class="inline-text">from:</span>
+        <select id="srclang" class='browser-default custom-select'>
+            <optgroup label="From language">
+                <option value="auto" selected>Auto</option>
+                <option value="el">Greek</option>
+                <option value="en">English</option>
+                <option value="de">German</option>
+                <option value="fr">French</option>
+            </optgroup>
+        </select>
+        <span class="inline-text">to: </span>
+        <select id="lang" class='browser-default custom-select'>
+            <optgroup label="To language">
+                <option value="el">Greek</option>
+                <option value="en" selected>English</option>
+                <option value="de">German</option>
+                <option value="fr">French</option>
+            </optgroup>
+        </select>
+        <button onclick="tran()" class="btn btn-info" id="trigger">Translate <span class="spinner-border spinner-border-sm" id="loader" style="display:none"></span></button>
+        <div class="jumbotron text-center" id="output-container">
+            <span id=output>Translation appears here.</span>
+            <br>
+            <span class="try-again"><button class="btn btn-info" style="display: none; margin-top:2%" id="retry" onclick=tran()>Try again <span style="font-family:FontAwesome;">&#xf01e;</span></button></span>
+            <p id="output-info">
+
+            </p>
+        </div>
+    </div>
+    <div class="modal fade" id="about">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">About</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    Made by stelios 2020©. Source code hasn't been patented.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Unsupported browser</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Unsupported browser. Please try from Chrome(42+), Edge(14+), Opera(29+) or Firefox(39+)
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                            Download Chrome
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="https://www.google.com/chrome/" target="_blank">Chrome</a>
+                            <a class="dropdown-item" href="https://www.microsoft.com/edge" target="_blank">Edge</a>
+                            <a class="dropdown-item" href="https://www.opera.com/download" target="_blank">Opera</a>
+                            <a class="dropdown-item" href="https://www.mozilla.org/firefox/new/" target="_blank">Firefox</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="browser">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">About your browser</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="browser-name">
+                    Your browser is a new version of Chrome, Edge Chromium, Firefox or Opera desktop.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="py-4 bg-dark text-white-50">
+
+        <!-- Copyright -->
+        <div class="container text-center">
+            Made by Stelios 2020©. With the support of <a href="https://translate.google.gr/" title="Google translste" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/272px-Google_2015_logo.svg.png" width=50> <span style="color:rgb(75,75,75)">translate</span></a>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+
+    <script>
+        if(localStorage.message !== "true") {
+            $('.toast').toast('show')
+            localStorage.message = "true"
+        }
+        var showModal = /modal-show=([^&]+)/.exec(window.location.href) || [null, "false"]
+        if(showModal[1] == "true") {
+            $('#modal').modal('show')
+        }
+        try {
+            fetch
+        } catch (e) {
+            $("#modal").modal('show')
+            if(/MSIE (\d+\.\d+);/.test(navigator.userAgent) || navigator.userAgent.indexOf("Trident/") > -1) {
+                $("#browser-name").html('You are using Internet Explorer. Please use Edge or an another newer browser.')
+            } else {
+                $('#browser-name').html('You are using an old browser or Opera Mobile.')
+            }
+        }
+        document.getElementById('lang').value = navigator.language.split("-")[0]
+        document.getElementById('srctext').focus()
+        var int;
+        var timer = 0
+
+        function tran() {
+            if(document.getElementById('srctext').value) {
+                var date = Date.now();
+                int = setInterval(function() {
+                    timer = Date.now() - date;
+                }, 1)
+                document.getElementById('loader').style.display = 'inline-block';
+                document.getElementById('retry').style.display = "none"
+                document.getElementById('trigger').disabled = true
+                document.getElementById('output').style.color = "#808080"
+                document.getElementById('output').innerHTML = "Translating..."
+                document.getElementById('output-info').innerHTML = ""
+                var from = document.getElementById('srclang').value
+                var to = document.getElementById('lang').value
+                var text = document.getElementById('srctext').value
+                var url = "https://cors-anywhere.herokuapp.com/https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + from + "&tl=" + to + "&dt=t&q=" + encodeURIComponent(text)
+
+                fetch(url, {
+                    "method": "POST"
+                }).then(function(req) {
+                    return req.text()
+                }).then(function(json) {
+                    console.log(json)
+                    var data = JSON.parse(json)[0]
+                    var e;
+                    document.getElementById('output').innerHTML = ""
+                    document.getElementById('output').style.color = "#333333"
+                    for(e = 0; e < data.length; e++) {
+                        var ttext = data[e][0]
+                        document.getElementById('output').innerHTML += ttext
+                    }
+                    document.getElementById('output-info').innerHTML = "Translated from: " + JSON.parse(json)[2] + ", to: " + to + " (" + timer + "ms)"
+                    document.getElementById('loader').style.display = "none"
+                    document.getElementById('trigger').disabled = false
+                    clearInterval(int)
+                    timer = 0
+                    int = 0
+                }).catch(function(e) {
+                    document.getElementById('retry').style.display = "inline-block"
+                    document.getElementById('output').style.color = "red"
+                    document.getElementById('output').innerHTML = "Can't connect to Google translation. Please try again in few minutes."
+                    document.getElementById('output-info').innerHTML = ""
+                    document.getElementById('loader').style.display = "none"
+                    console.log(e)
+                    document.getElementById('trigger').disabled = false
+                    clearInterval(int)
+                    timer = 0
+                    int = 0
+                })
+            } else {
+                $("#srctext").popover('show')
+                $("#srctext").on('click', function() {
+                    $("#srctext").popover('dispose')
+                })
+            }
+        }
+    </script>
+
+</body>
+
+</html>
