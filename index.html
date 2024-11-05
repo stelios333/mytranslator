@@ -4,6 +4,9 @@
 <head>
     <title> Stelios translator </title>
     <meta name="google-site-verification" content="BVnery9jkj6waasFFNm3WiyTpQheFLpSyVMPUdsL8tg" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         @font-face {
             font-family: 'FontAwesome';
@@ -17,10 +20,9 @@
         }
 
         .logo {
-            font-size: 300%;
+            font-size: 150%;
             text-align: center;
             margin: 5% 5%;
-
         }
 
         .container {
@@ -47,8 +49,9 @@
 
         #trigger {
             font: 125% Arial;
-            padding: 0.75% 15%;
-            margin-left: 3%;
+            padding: 6px 24px;
+            font: 150% Arial;
+            vertical-align: bottom;
         }
 
         #lang,
@@ -65,12 +68,6 @@
             font: 125% Arial;
         }
 
-        /* Style for mobile */
-        @media only screen and (max-width: 990px) {
-            #trigger {
-                padding: 0.75% 12%;
-            }
-        }
 
         @media only screen and (min-height: 800px) {
 
@@ -81,11 +78,8 @@
                 font: 150% Arial;
             }
 
-            #trigger {
-                margin-top: 3%;
-                padding: 1% 10%;
-                font: 150% Arial;
-                transform: translate(0, -24%);
+            .logo {
+                font-size: 250%;
             }
 
             #srctext {
@@ -104,12 +98,12 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -140,7 +134,8 @@
             </ul>
         </div>
     </nav>
-    <div class="toast" style="position: absolute; top: 12%; right: 1%; background-color: rgba(255, 255, 255, 1);" data-delay="8000">
+    <div class="toast" style="position: absolute; top: 12%; right: 1%; background-color: rgba(255, 255, 255, 1);"
+        data-delay="8000">
         <div class="toast-header" style="background-color: rgba(255, 255, 255, 1);">
             <span class="mr-2" style="font-family:FontAwesome;color:green">&#xf058;</span>
             <strong class="mr-auto">What's new</strong>
@@ -150,12 +145,15 @@
             </button>
         </div>
         <div class="toast-body">
-            The new version 3x faster than the previous version.<br>Now server doesn't crashes or delay a lot. 
+            The new version 3x faster than the previous version.<br>Now server doesn't crashes or delay a lot.
         </div>
     </div>
     <div class="container">
         <div class="logo"><span>Stelios Translator - The #1 translator in the web</span></div>
-        <input class="form-control" type="text" data-title="Error" data-content="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This field is required.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" data-placement="top" placeholder="Type text to translate" id="srctext" onkeyup="if(event.key=='Enter'){tran()}">
+        <input class="form-control" type="text" data-title="Error"
+            data-content="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This field is required.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+            data-placement="top" placeholder="Type text to translate" id="srctext"
+            onkeyup="if(event.key=='Enter'){tran()}">
         <span class="inline-text">from:</span>
         <select id="srclang" class='browser-default custom-select'>
             <optgroup label="From language">
@@ -175,11 +173,13 @@
                 <option value="fr">French</option>
             </optgroup>
         </select>
-        <button onclick="tran()" class="btn btn-info" id="trigger">Translate <span class="spinner-border spinner-border-sm" id="loader" style="display:none"></span></button>
+        <button onclick="tran()" class="btn btn-info" id="trigger">Translate <span
+                class="spinner-border spinner-border-sm" id="loader" style="display:none"></span></button>
         <div class="jumbotron text-center" id="output-container">
             <span id=output>Translation appears here.</span>
             <br>
-            <span class="try-again"><button class="btn btn-info" style="display: none; margin-top:2%" id="retry" onclick=tran()>Try again <span style="font-family:FontAwesome;">&#xf01e;</span></button></span>
+            <span class="try-again"><button class="btn btn-info" style="display: none; margin-top:2%" id="retry"
+                    onclick=tran()>Try again <span style="font-family:FontAwesome;">&#xf01e;</span></button></span>
             <p id="output-info">
 
             </p>
@@ -194,7 +194,8 @@
                 </div>
                 <div class="modal-body">
                     Made by stelios 2021©.<br>
-                    Project is under the <a href="https://github.com/stelios333/mytranslator/blob/main/LICENSE">GPL</a> license                    
+                    Project is under the <a href="https://github.com/stelios333/mytranslator/blob/main/LICENSE">GPL</a>
+                    license
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info" data-dismiss="modal">Ok</button>
@@ -204,7 +205,8 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -214,7 +216,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Unsupported browser. Please try from Chrome(42+), Edge(14+), Opera(29+) or Firefox(39+)
+                    Unsupported browser. Please use Chrome(42+), Edge(14+), Opera(29+) or Firefox(39+).
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -226,7 +228,8 @@
                             <a class="dropdown-item" href="https://www.google.com/chrome/" target="_blank">Chrome</a>
                             <a class="dropdown-item" href="https://www.microsoft.com/edge" target="_blank">Edge</a>
                             <a class="dropdown-item" href="https://www.opera.com/download" target="_blank">Opera</a>
-                            <a class="dropdown-item" href="https://www.mozilla.org/firefox/new/" target="_blank">Firefox</a>
+                            <a class="dropdown-item" href="https://www.mozilla.org/firefox/new/"
+                                target="_blank">Firefox</a>
                         </div>
                     </div>
                 </div>
@@ -253,11 +256,12 @@
 
         <!-- Copyright -->
         <div class="container text-center">
-            Made by Stelios 2020©. 
+            Made by Stelios 2020©.
             Using
             <a href="https://translate.google.gr/" title="Google translste" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/272px-Google_2015_logo.svg.png" width=50> 
-                <span style="color:rgb(75,75,75)">translate</span>.
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/272px-Google_2015_logo.svg.png"
+                    width=50>
+                <span style="color:rgb(200,200,200)">translate</span>.
             </a>
             Google logo is a Google's LLC trademark.
         </div>
@@ -266,19 +270,21 @@
     </footer>
 
     <script>
-        if(localStorage.message !== "true") {
+        const cors_proxy = "https://cors-proxy.fringe.zone/"
+
+        if (localStorage.message !== "true") {
             $('.toast').toast('show')
             localStorage.message = "true"
         }
         var showModal = /modal-show=([^&]+)/.exec(window.location.href) || [null, "false"]
-        if(showModal[1] == "true") {
+        if (showModal[1] == "true") {
             $('#modal').modal('show')
         }
         try {
             fetch
         } catch (e) {
             $("#modal").modal('show')
-            if(/MSIE (\d+\.\d+);/.test(navigator.userAgent) || navigator.userAgent.indexOf("Trident/") > -1) {
+            if (/MSIE (\d+\.\d+);/.test(navigator.userAgent) || navigator.userAgent.indexOf("Trident/") > -1) {
                 $("#browser-name").html('You are using Internet Explorer. Please use Edge or an another newer browser.')
             } else {
                 $('#browser-name').html('You are using an old browser or Opera Mobile.')
@@ -290,9 +296,9 @@
         var timer = 0
 
         function tran() {
-            if(document.getElementById('srctext').value) {
+            if (document.getElementById('srctext').value) {
                 var date = Date.now();
-                int = setInterval(function() {
+                int = setInterval(function () {
                     timer = Date.now() - date;
                 }, 1)
                 document.getElementById('loader').style.display = 'inline-block';
@@ -304,32 +310,32 @@
                 var from = document.getElementById('srclang').value
                 var to = document.getElementById('lang').value
                 var text = document.getElementById('srctext').value
-                var url = "https://corsproxy.io/?"+encodeURIComponent("https://translate.googleapis.com/translate_a/single?client=gtx&sl=" + from + "&tl=" + to + "&dt=t&q=" + encodeURIComponent(text))
+                var url = cors_proxy + "http://translate.googleapis.com/translate_a/single?client=gtx&sl=" + from + "&tl=" + to + "&dt=t&q=" + encodeURIComponent(text)
 
                 fetch(url, {
                     "method": "POST"
-                }).then(function(req) {
+                }).then(function (req) {
                     return req.text()
-                }).then(function(json) {
-                    console.log(json)
-                    var data = JSON.parse(JSON.parse(json).contents)[0]
+                }).then(function (json_string) {
+                    console.log(json_string)
+                    var data = JSON.parse(json_string)
+                    var translation = data[0][0][0]
                     var e;
                     document.getElementById('output').innerHTML = ""
-                    document.getElementById('output').style.color = "#333333"
-                    for(e = 0; e < data.length; e++) {
-                        var ttext = data[e][0]
-                        document.getElementById('output').innerHTML += ttext
-                    }
-                    document.getElementById('output-info').innerHTML = "Translated from: " + JSON.parse(JSON.parse(json).contents)[2] + ", to: " + to + " (" + timer + "ms)"
+                    document.getElementById('output').style.color = "#333"
+
+                    document.getElementById('output').innerHTML = translation
+
+                    document.getElementById('output-info').innerHTML = "Translated from: " + data[2] + ", to: " + to + " (" + timer + "ms)"
                     document.getElementById('loader').style.display = "none"
                     document.getElementById('trigger').disabled = false
                     clearInterval(int)
                     timer = 0
                     int = 0
-                }).catch(function(e) {
+                }).catch(function (e) {
                     document.getElementById('retry').style.display = "inline-block"
                     document.getElementById('output').style.color = "red"
-                    document.getElementById('output').innerHTML = "Can't connect to Google translation. Please try again in few minutes."
+                    document.getElementById('output').innerHTML = "Can't connect to Google Translate. Please try again in few minutes."
                     document.getElementById('output-info').innerHTML = ""
                     document.getElementById('loader').style.display = "none"
                     console.log(e)
@@ -340,7 +346,7 @@
                 })
             } else {
                 $("#srctext").popover('show')
-                $("#srctext").on('click', function() {
+                $("#srctext").on('click', function () {
                     $("#srctext").popover('dispose')
                 })
             }
