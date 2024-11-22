@@ -1,5 +1,5 @@
-
 # [Stelios Translator](https://stelios333.github.io/mytranslator/)
-This is a site whitch can translate some languages using Google Translate.
+An automatic translator that uses Google's translate API and a text-to-speech tool. It is my first project to use a build system (vite).
 
-[GPL v2 License](https://github.com/stelios333/mytranslator/blob/main/LICENSE)
+
+This project is under the [GPL v2 License](https://github.com/stelios333/mytranslator/blob/main/LICENSE)

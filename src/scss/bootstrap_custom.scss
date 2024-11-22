@@ -1,0 +1,10 @@
+
+@import "bootstrap/scss/bootstrap.scss";
+$mynewcolor:#17a2b8;
+.btn-info {
+  @include button-variant($mynewcolor, darken($mynewcolor, 7.5%), #fff, darken($mynewcolor,5%), darken($mynewcolor, 10%), #fff);
+}
+
+.btn-outline-primary {
+  @include button-outline-variant($mynewcolor, #222222, lighten($mynewcolor,5%), $mynewcolor);
+}

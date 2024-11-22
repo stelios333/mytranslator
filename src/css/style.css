@@ -1,0 +1,148 @@
+html,
+body,
+.page-wrapper {
+    height: 100%;
+}
+
+.everything{
+    display: block !important;
+}
+
+.page-content {
+    max-height: 100%;
+    overflow: auto;
+}
+
+.title {
+    font-size: 250%;
+    text-align: center;
+    display: none;
+}
+
+#output-container {
+    color: #808080;
+    margin-top: -1px;
+    border-bottom-left-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+}
+
+
+#srctext {
+    font-size: 18px;
+}
+
+#ttstext {
+    font-size: 18px;
+}
+
+.form-control:focus {
+    z-index: 1 !important;
+}
+
+#trigger {
+    font-size: 18px;
+    padding: 6px 6px;
+    font-size: 20px;
+    white-space: nowrap;
+    flex-basis: 0;
+    display: block;
+}
+
+
+select optgroup {
+    font: 90% Arial;
+}
+
+
+#output {
+    overflow: auto;
+    max-height: 100%;
+    padding: 0.375rem 0.75rem;
+}
+
+#browserInfo {
+    font-weight: bold;
+}
+
+.tts-container {
+    max-width: 800px;
+    width: 100%;
+    align-self: center;
+}
+
+.slider-value {
+    width: 3em;
+    height: fit-content;
+    align-self: self-end;
+}
+
+.block-children>* {
+    display: block;
+}
+
+.input-group>* {
+    display: inline;
+}
+
+
+.very-small {
+    font-size: 0.75em;
+}
+
+.no-resize {
+    resize: none;
+}
+
+.flat-bottom-children>* {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.flat-bottom {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    margin-bottom: -1px;
+}
+
+.flat-top {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    margin-top: -1px;
+}
+
+.flex-even {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.flex-autodirection {
+    flex-direction: column;
+}
+
+@media only screen and (min-height: 800px) {
+
+
+
+    #output-container {
+        font-size: 18px;
+    }
+
+}
+
+@media only screen and (min-width: 800px) {
+    .title {
+        display: block;
+    }
+
+    .flex-autodirection {
+        flex-direction: row;
+    }
+}
+
+.text-size-18 * {
+    font-size: 18px !important;
+}
+
+.min-h-0 {
+    min-height: 0;
+}
