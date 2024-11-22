@@ -5,7 +5,7 @@ const corsProxies = ["https://api.allorigins.win/raw?url=", "https://cors-proxy.
 var corsProxyIndex = 0
 
 const simulateUnsupportedBrowser = /modal-show=([^&]+)/.exec(window.location.href) || [null, "false"]
-const currentVersion = "1.7.3b"
+const currentVersion = "1.7.4b"
 const output = document.getElementById("output")
 const toLangInput = document.getElementById('lang')
 const srcLangInput = document.getElementById('srclang')
@@ -117,6 +117,7 @@ speakBtn.onclick = () => {
 
 stopBtn.onclick = () => {
     speechSynthesis.cancel()
+    utterance.onend()
 }
 
 // Collapse navbar when clicking items on mobile
@@ -205,7 +206,6 @@ function speak() {
     utterance.lang = ttsLang.value;
     utterance.pitch = ttsPitchSlider.value / 50
     utterance.rate = ttsRateSlider.value / 50
-    debugger
     speechSynthesis.speak(utterance);
 }
 
