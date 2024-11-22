@@ -5,7 +5,7 @@ const corsProxies = ["https://api.allorigins.win/raw?url=", "https://cors-proxy.
 var corsProxyIndex = 0
 
 const simulateUnsupportedBrowser = /modal-show=([^&]+)/.exec(window.location.href) || [null, "false"]
-const currentVersion = "1.7.2b"
+const currentVersion = "1.7.3b"
 const output = document.getElementById("output")
 const toLangInput = document.getElementById('lang')
 const srcLangInput = document.getElementById('srclang')

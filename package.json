@@ -1,14 +1,18 @@
 {
   "name": "stelios-translator",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.7.3b",
   "type": "module",
+  "homepage": "https://stelios333.github.io/mytranslator/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d src/dist"
   },
   "devDependencies": {
+    "gh-pages": "^6.2.0",
     "sass": "1.77.6",
     "vite": "^5.4.10"
   },
@@ -17,4 +21,5 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3"
   }
+  
 }
